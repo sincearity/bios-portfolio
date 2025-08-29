@@ -8,13 +8,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/InteractiveTerminal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/card.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/container.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/terminal.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/InteractiveTerminal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/InteractiveTerminal.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ui/typewriter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/typewriter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/typography.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tailwind.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tailwind.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +89,7 @@
       <option name="presentableId" value="Default" />
       <updated>1756439772728</updated>
       <workItem from="1756441106539" duration="22000" />
-      <workItem from="1756441129923" duration="16445000" />
+      <workItem from="1756441129923" duration="17176000" />
     </task>
     <servers />
   </component>

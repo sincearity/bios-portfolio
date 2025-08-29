@@ -53,27 +53,38 @@ GITHUB: https://github.com/sincearity`
 
 export function InteractiveTerminal() {
     const [scene, setScene] = useState<Scene>("home")
-    const [instant, setInstant] = useState(false)
+    const [phase, setPhase] = useState<"idle" | "out" | "in">("idle")
+    const [instantNext, setInstantNext] = useState(false)
+    const [scanKey, setScanKey] = useState(0) // to retrigger wipe
+
+    const transitionTo = useCallback((next: Scene, instant: boolean) => {
+        setPhase("out")
+        setInstantNext(instant)
+        // fade-out quickly, then wipe + swap
+        window.setTimeout(() => {
+            setScanKey((k) => k + 1) // retrigger scan overlay
+            setScene(next)
+            setPhase("in")
+            // after fade-in, return to idle
+            window.setTimeout(() => setPhase("idle"), 240)
+        }, 180)
+    }, [])
 
     const handleSelect = useCallback((id: string) => {
-        if (id === "bios-terminal") setScene("bios-terminal")
-        if (id === "mustard-cms") setScene("mustard-cms")
-        // animate when opening
-        setInstant(false)
-    }, [])
+        if (id === "bios-terminal") transitionTo("bios-terminal", false)
+        if (id === "mustard-cms")   transitionTo("mustard-cms", false)
+    }, [transitionTo])
 
     const handleOpen = useCallback((id: string) => {
-        setInstant(false)                 // animate this next text
-        if (id === "bios-terminal") setScene("bios-terminal")
-        if (id === "mustard-cms") setScene("mustard-cms")
-    }, [])
+        if (id === "bios-terminal") transitionTo("bios-terminal", false)
+        if (id === "mustard-cms")   transitionTo("mustard-cms", false)
+    }, [transitionTo])
 
     const handleBack = useCallback(() => {
-        setInstant(true)                  // next text (home) renders instantly
-        setScene("home")
-    }, [])
+        transitionTo("home", true) // instant on return
+    }, [transitionTo])
 
-
+    // keyboard: b = back
     useEffect(() => {
         const onKey = (e: KeyboardEvent) => {
             if (e.key.toLowerCase() === "b" && scene !== "home") handleBack()
@@ -82,14 +93,21 @@ export function InteractiveTerminal() {
         return () => window.removeEventListener("keydown", onKey)
     }, [scene, handleBack])
 
+    const text = getSceneText(scene)
+
     return (
-        <Typewriter
-            text={getSceneText(scene)}
-            speed={24}
-            onSelect={handleSelect}
-            onOpen={handleOpen}
-            onBack={handleBack}
-            instant={instant}
-        />
+        <div className={phase === "out" ? "scene-exit" : phase === "in" ? "scene-enter" : undefined}>
+            {/* scanline wipe overlay during phase "in" to sell the swap */}
+            {phase === "in" && <div key={scanKey} className="scan-wipe" />}
+
+            <Typewriter
+                text={text}
+                speed={24}
+                onSelect={handleSelect}
+                onOpen={handleOpen}
+                onBack={handleBack}
+                instant={instantNext}
+            />
+        </div>
     )
 }

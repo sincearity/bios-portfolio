@@ -209,14 +209,15 @@ a:hover {
 }
 
 /* focus = subtle underline instead of glowing box */
-.focus-ring { outline: none; }
-.focus-ring:focus-visible {
-    text-decoration: underline;
-    text-decoration-thickness: 2px;
-    text-underline-offset: 4px;
-    text-decoration-color: hsl(var(--accent) / 0.8);
+.focus-ring {
+  outline: none;
 }
-
+.focus-ring:focus-visible {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  text-decoration-color: hsl(var(--accent) / 0.8);
+}
 
 /* Subtle text colors */
 .text-muted {
@@ -251,4 +252,30 @@ a:hover {
   box-shadow:
     0 8px 24px rgba(0, 0, 0, 0.35),
     0 0 30px hsl(var(--accent) / 0.1); /* base glow; animated via .animate-glow */
+}
+
+/* scene fades */
+@keyframes scene-fade-in {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes scene-fade-out {
+    from { opacity: 1; transform: translateY(0); }
+    to   { opacity: 0; transform: translateY(-4px); }
+}
+.scene-enter { animation: scene-fade-in 220ms ease-out; }
+.scene-exit  { animation: scene-fade-out 180ms ease-in forwards; }
+
+/* quick CRT scanline wipe */
+@keyframes scan-wipe {
+    0%   { opacity: 0; transform: translateY(-100%); }
+    10%  { opacity: .6; }
+    100% { opacity: 0; transform: translateY(100%); }
+}
+.scan-wipe {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.06) 50%, rgba(255,255,255,0) 100%);
+    animation: scan-wipe 380ms ease-in-out;
 }
