@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "next/core-web-vitals", // since you’re in a Next.js app
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "semi": ["error", "never"],
+    "quotes": ["error", "single"]
+  }
+}
