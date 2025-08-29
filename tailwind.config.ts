@@ -1,9 +1,14 @@
 import type { Config } from 'tailwindcss'
 
-const config: Config = {
+const config = {
   darkMode: 'class',
-  content: ['./src/**/*.{ts,tsx}'],
+  content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
+    container: {
+      center: true,
+      padding: '1rem',
+      screens: { '2xl': '1280px' },
+    },
     extend: {
       colors: {
         bg: 'hsl(var(--bg))',
@@ -35,10 +40,43 @@ const config: Config = {
         slow: 'var(--motion-slow)',
       },
       fontFamily: {
-        mono: ['ui-monospace', 'monospace'],
+        sans: [
+          'Inter',
+          'ui-sans-serif',
+          'system-ui',
+          'Segoe UI',
+          'Helvetica Neue',
+          'Arial',
+          'Noto Sans',
+          'Apple Color Emoji',
+          'Segoe UI Emoji',
+          'Segoe UI Symbol',
+        ],
+        mono: [
+          'ui-monospace',
+          'SFMono-Regular',
+          'Menlo',
+          'Monaco',
+          'Consolas',
+          'Liberation Mono',
+          'Courier New',
+          'monospace',
+        ],
+      },
+      keyframes: {
+        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+        float: {
+          '0%,100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-2%)' },
+        },
+      },
+      animation: {
+        fadeIn: 'fadeIn var(--motion-slow) ease-in-out both',
+        float: 'float 6s ease-in-out infinite',
       },
     },
   },
   plugins: [],
-}
+} satisfies Config
+
 export default config
