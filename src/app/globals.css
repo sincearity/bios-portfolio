@@ -1,11 +1,15 @@
 @import 'tailwindcss';
 
-/* ---- Design tokens ---- */
+/* =========================================================
+   1) DESIGN TOKENS (base)
+   ========================================================= */
 :root {
   /* neutrals */
   --bg: 0 0% 0%;
   --fg: 0 0% 100%;
   --muted: 0 0% 70%;
+
+  /* accent (default = cyan/green) */
   --accent: 160 100% 60%;
 
   /* surfaces */
@@ -17,7 +21,7 @@
   --border: 0 0% 22%;
   --ring: var(--accent);
 
-  /* states (for future components) */
+  /* states */
   --success: 160 80% 48%;
   --warning: 40 95% 55%;
   --danger: 0 85% 58%;
@@ -26,7 +30,7 @@
   --radius-sm: 6px;
   --radius: 8px;
   --radius-lg: 12px;
-  --space: 24px; /* base vertical rhythm */
+  --space: 24px;
   --motion-fast: 150ms;
   --motion-slow: 400ms;
 
@@ -35,8 +39,50 @@
 
   /* background grid texture */
   --grid: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+
+  /* aurora colors (match accent lightly) */
+  --aurora-1: 0, 255, 200; /* cyan/green */
+  --aurora-2: 150, 0, 255; /* violet */
+  --aurora-3: 0, 120, 255; /* blue */
 }
 
+/* =========================================================
+   2) ACCENT THEME PRESETS  (toggle via <html data-accent="...">)
+   ========================================================= */
+html[data-accent='cyan'] {
+  --accent: 160 100% 60%;
+  --aurora-1: 0, 255, 200;
+  --aurora-2: 150, 0, 255;
+  --aurora-3: 0, 120, 255;
+}
+html[data-accent='purple'] {
+  --accent: 268 90% 65%;
+  --aurora-1: 140, 0, 255;
+  --aurora-2: 255, 0, 180;
+  --aurora-3: 80, 0, 255;
+}
+html[data-accent='amber'] {
+  --accent: 38 100% 56%;
+  --aurora-1: 255, 180, 0;
+  --aurora-2: 255, 80, 0;
+  --aurora-3: 255, 220, 120;
+}
+html[data-accent='blue'] {
+  --accent: 212 100% 60%;
+  --aurora-1: 0, 140, 255;
+  --aurora-2: 0, 220, 255;
+  --aurora-3: 80, 0, 255;
+}
+html[data-accent='magenta'] {
+  --accent: 315 85% 65%;
+  --aurora-1: 255, 0, 180;
+  --aurora-2: 160, 0, 255;
+  --aurora-3: 255, 120, 220;
+}
+
+/* =========================================================
+   3) BASE ELEMENTS
+   ========================================================= */
 html,
 body {
   height: 100%;
@@ -45,40 +91,72 @@ body {
 body {
   background: hsl(var(--bg));
   color: hsl(var(--fg));
-  font-family:
-    ui-monospace, monospace; /* keep terminal-modern; switch to Inter later if you want */
+  font-family: ui-monospace, monospace;
   font-size: 15px;
   line-height: 1.5;
   padding: 2rem;
 }
 
-/* synced cursor blink with glow pulse */
-@keyframes blink-sync {
-  0%,
-  100% {
-    opacity: 1;
+/* selections + links */
+::selection {
+  background: hsl(var(--accent));
+  color: hsl(var(--bg));
+}
+a {
+  text-underline-offset: 3px;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* =========================================================
+   4) AMBIENT BACKGROUND (aurora + grid + vignette + noise)
+   ========================================================= */
+/* aurora shift behind the grid */
+@keyframes bg-shift {
+  0% {
+    background-position:
+      0% 50%,
+      0 0;
   }
-  40%,
-  60% {
-    opacity: 0.3;
-  } /* dim slightly instead of disappearing */
+  50% {
+    background-position:
+      100% 50%,
+      0 0;
+  }
+  100% {
+    background-position:
+      0% 50%,
+      0 0;
+  }
 }
 
-.animate-blink-sync {
-  animation: blink-sync 4s ease-in-out infinite;
-}
-
-/* faint grid */
+/* layer A: aurora + grid (blend) */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background: var(--grid) 0 0 / 16px 16px;
-  opacity: 0.08; /* default desktop */
+  background:
+    linear-gradient(
+      120deg,
+      rgba(var(--aurora-1), 0.08) 0%,
+      rgba(var(--aurora-2), 0.08) 40%,
+      rgba(var(--aurora-3), 0.08) 100%
+    ),
+    var(--grid);
+  background-size:
+    200% 200%,
+    16px 16px;
+  background-repeat: no-repeat, repeat;
+  background-position:
+    0% 50%,
+    0 0;
+  mix-blend-mode: overlay;
+  animation: bg-shift 22s ease-in-out infinite;
 }
 
-/* very faint film grain + vignette + subtle flicker */
+/* layer B: vignette + noise flicker */
 @keyframes grain-shift {
   0%,
   100% {
@@ -92,7 +170,6 @@ body::before {
       18px -18px;
   }
 }
-
 body::after {
   content: '';
   position: fixed;
@@ -100,34 +177,29 @@ body::after {
   pointer-events: none;
   background:
     radial-gradient(circle at center, rgba(0, 0, 0, 0) 72%, rgba(0, 0, 0, 0.45) 100%),
-    /* vignette */
-      url("data:image/svg+xml;utf8,\
+    url("data:image/svg+xml;utf8,\
 <svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'>\
 <filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch' /></filter>\
-<rect width='100%' height='100%' filter='url(%23n)' opacity='0.035'/></svg>"); /* noise */
+<rect width='100%' height='100%' filter='url(%23n)' opacity='0.035'/></svg>");
   background-repeat: no-repeat, repeat;
   background-size:
     100% 100%,
     160px 160px;
   background-position:
     center,
-    0 0; /* first = vignette, second = noise */
+    0 0;
   animation: grain-shift 3.5s steps(2, end) infinite;
 }
 
 /* ---- Mobile tweaks ---- */
 @media (max-width: 640px) {
-  /* soften grid */
-  body::before {
-    opacity: 0.05;
-  }
-
-  /* soften vignette */
+  body {
+    padding: 2rem;
+  } /* keep or adjust */
   body::after {
     background:
       radial-gradient(circle at center, rgba(0, 0, 0, 0) 78%, rgba(0, 0, 0, 0.3) 100%),
-      /* later start + lighter */
-        url("data:image/svg+xml;utf8,\
+      url("data:image/svg+xml;utf8,\
 <svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'>\
 <filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch' /></filter>\
 <rect width='100%' height='100%' filter='url(%23n)' opacity='0.035'/></svg>");
@@ -141,26 +213,9 @@ body::after {
   }
 }
 
-/* small UX touches */
-::selection {
-  background: hsl(var(--accent));
-  color: hsl(var(--bg));
-}
-a {
-  text-underline-offset: 3px;
-}
-a:hover {
-  text-decoration: underline;
-}
-
-/* respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .animate-blink {
-    animation: none !important;
-  }
-}
-
-/* glow behind terminal */
+/* =========================================================
+   5) TERMINAL GLOW + CURSOR
+   ========================================================= */
 @keyframes pulse-glow {
   0%,
   100% {
@@ -174,12 +229,21 @@ a:hover {
       0 0 40px hsl(var(--accent) / 0.18);
   }
 }
-
 .animate-glow {
   animation: pulse-glow 4s ease-in-out infinite;
 }
 
-/* subtle fast flicker on the cursor fill */
+/* cursor (synced breath + subtle flicker) */
+@keyframes blink-sync {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  40%,
+  60% {
+    opacity: 0.3;
+  }
+}
 @keyframes caret-flicker {
   0%,
   100% {
@@ -187,16 +251,18 @@ a:hover {
   }
   50% {
     filter: brightness(1.35);
-  } /* tiny pop, not distracting */
+  }
+}
+.animate-blink-sync {
+  animation: blink-sync 4s ease-in-out infinite;
 }
 
-/* compose: outer handles the 4s breath; inner does the 900ms flicker */
 .caret {
   display: inline-block;
   width: 1px;
   height: 1.1em;
   vertical-align: -0.1em;
-  margin-left: 0.125rem; /* ml-0.5 */
+  margin-left: 0.125rem;
   animation: blink-sync 4s ease-in-out infinite;
 }
 .caret > i {
@@ -207,29 +273,25 @@ a:hover {
   animation: caret-flicker 900ms steps(2, end) infinite;
 }
 
-/* respect reduced motion — disable ambient/typing animations */
+/* =========================================================
+   6) ACCESSIBILITY: REDUCED MOTION (one place for all)
+   ========================================================= */
 @media (prefers-reduced-motion: reduce) {
-  .animate-glow {
-    animation: none !important;
-  }
-  .animate-blink-sync {
-    animation: none !important;
-  }
-  .caret {
-    animation: none !important;
-  }
+  .animate-glow,
+  .animate-blink-sync,
+  .caret,
   .caret > i {
     animation: none !important;
   }
-  body::before {
-    animation: none !important;
-  } /* bg-shift */
+  body::before,
   body::after {
     animation: none !important;
-  } /* grain-shift */
+  } /* bg-shift + grain-shift */
 }
 
-/* focus = subtle underline instead of glowing box */
+/* =========================================================
+   7) UX UTILITIES
+   ========================================================= */
 .focus-ring {
   outline: none;
 }
@@ -240,7 +302,6 @@ a:hover {
   text-decoration-color: hsl(var(--accent) / 0.8);
 }
 
-/* Subtle text colors */
 .text-muted {
   color: hsl(var(--muted));
 }
@@ -254,7 +315,6 @@ a:hover {
   color: hsl(var(--danger));
 }
 
-/* Link look that fits terminal-modern */
 .link {
   color: hsl(var(--accent));
   text-underline-offset: 3px;
@@ -263,7 +323,7 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Reusable terminal container */
+/* terminal container */
 .terminal-box {
   border: 1px solid hsl(var(--border) / 0.7);
   background: hsl(var(--surface-0) / 0.95);
@@ -272,10 +332,12 @@ a:hover {
   overflow: hidden;
   box-shadow:
     0 8px 24px rgba(0, 0, 0, 0.35),
-    0 0 30px hsl(var(--accent) / 0.1); /* base glow; animated via .animate-glow */
+    0 0 30px hsl(var(--accent) / 0.1); /* animated via .animate-glow */
 }
 
-/* scene fades */
+/* =========================================================
+   8) SCENE TRANSITIONS
+   ========================================================= */
 @keyframes scene-fade-in {
   from {
     opacity: 0;
