@@ -2,14 +2,36 @@
 
 /* ---- Design tokens ---- */
 :root {
-  --bg: 0 0% 0%; /* pure black */
-  --fg: 0 0% 100%; /* pure white */
-  --muted: 0 0% 70%; /* gray */
-  --accent: 160 100% 60%; /* cyan/green */
+  /* neutrals */
+  --bg: 0 0% 0%;
+  --fg: 0 0% 100%;
+  --muted: 0 0% 70%;
+  --accent: 160 100% 60%;
 
-  /* needed by your page.tsx classes */
-  --border: 0 0% 22%; /* thin gray border */
-  --card: 0 0% 6%; /* slightly lighter than bg for header strip */
+  /* surfaces */
+  --surface-0: var(--bg); /* page */
+  --surface-1: 0 0% 6%; /* panels/headers */
+  --surface-2: 0 0% 10%; /* elevated surfaces */
+
+  /* borders & rings */
+  --border: 0 0% 22%;
+  --ring: var(--accent);
+
+  /* states (for future components) */
+  --success: 160 80% 48%;
+  --warning: 40 95% 55%;
+  --danger: 0 85% 58%;
+
+  /* radii / spacing / motion */
+  --radius-sm: 6px;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --space: 24px; /* base vertical rhythm */
+  --motion-fast: 150ms;
+  --motion-slow: 400ms;
+
+  /* card/headers */
+  --card: var(--surface-1);
 
   /* background grid texture */
   --grid: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
@@ -184,4 +206,49 @@ a:hover {
   .caret > i {
     animation: none !important;
   }
+}
+
+/* focus = subtle underline instead of glowing box */
+.focus-ring { outline: none; }
+.focus-ring:focus-visible {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+    text-decoration-color: hsl(var(--accent) / 0.8);
+}
+
+
+/* Subtle text colors */
+.text-muted {
+  color: hsl(var(--muted));
+}
+.text-success {
+  color: hsl(var(--success));
+}
+.text-warning {
+  color: hsl(var(--warning));
+}
+.text-danger {
+  color: hsl(var(--danger));
+}
+
+/* Link look that fits terminal-modern */
+.link {
+  color: hsl(var(--accent));
+  text-underline-offset: 3px;
+}
+.link:hover {
+  text-decoration: underline;
+}
+
+/* Reusable terminal container */
+.terminal-box {
+  border: 1px solid hsl(var(--border) / 0.7);
+  background: hsl(var(--surface-0) / 0.95);
+  border-radius: var(--radius);
+  backdrop-filter: blur(2px);
+  overflow: hidden;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.35),
+    0 0 30px hsl(var(--accent) / 0.1); /* base glow; animated via .animate-glow */
 }

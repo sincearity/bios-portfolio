@@ -5,22 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4dd039d-9934-477b-9c80-ffc066359cfc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.eslintrc.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eslint.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/eslint.config.mjs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/postcss.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/postcss.config.mjs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/lib/cn.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/lib/cn.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ui/terminal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/terminal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/InteractiveTerminal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/card.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/container.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/terminal.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ui/typewriter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/typewriter.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/typography.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/tailwind.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tailwind.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,8 +24,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -100,7 +94,7 @@
       <option name="presentableId" value="Default" />
       <updated>1756439772728</updated>
       <workItem from="1756441106539" duration="22000" />
-      <workItem from="1756441129923" duration="10717000" />
+      <workItem from="1756441129923" duration="16445000" />
     </task>
     <servers />
   </component>
