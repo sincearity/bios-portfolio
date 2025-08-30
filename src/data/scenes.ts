@@ -9,8 +9,15 @@ syntax-like highlights, and synced cursor.
 
 STACK
 - Next.js (App Router)
-- Tailwind tokens + utilities
-- Custom Typewriter (smart pauses, links)
+- TypeScript
+- Tailwind (design tokens + utilities)
+- Custom Typewriter component
+- Framer Motion (animations)
+
+HIGHLIGHTS
+- Accessible motion fallbacks
+- Dark-first visual language
+- Inline actions and smart pauses
 
 ACTIONS
 [BACK]`,
@@ -20,10 +27,19 @@ MUSTARD CMS
 A lightweight content system focused on designer-friendly workflows
 and clean, opinionated UI components.
 
+STACK
+- Next.js (App Router)
+- TypeScript
+- Tailwind (design tokens + utilities)
+- Payload CMS
+- Postgres (via Neon)
+- Vercel (deploy + hosting)
+- Version Control integration
+
 HIGHLIGHTS
-- MDX content
-- Design tokens
 - Minimal authoring experience
+- Scalable design system primitives
+- Built-in version control for safe content ops
 
 ACTIONS
 [BACK]`,
@@ -34,7 +50,11 @@ COO @ MUSTARD SOFTWARE. DESIGNER + ENGINEER.
 
 [PROJECTS]
 - BIOS-TERMINAL      [OPEN bios-terminal]
+  stack: Next.js · TypeScript · Tailwind · Framer Motion
+
 - MUSTARD CMS        [OPEN mustard-cms]
+  stack: Next.js · TypeScript · Tailwind · Payload CMS · Postgres · Vercel
+
 
 [INFO]
 - ABOUT              [OPEN about]
