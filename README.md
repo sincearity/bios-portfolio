@@ -6,6 +6,7 @@ Features a typewriter effect, interactive scenes, and a dark/light theme toggle.
 ---
 
 ## 🚀 Tech Stack
+
 - **Framework:** Next.js (App Router)
 - **Styling:** Tailwind CSS + custom design tokens
 - **UI:** Interactive terminal, typewriter animation, aurora background
@@ -15,6 +16,7 @@ Features a typewriter effect, interactive scenes, and a dark/light theme toggle.
 ---
 
 ## 🛠 Development
+
 ```bash
 # install dependencies
 npm install
@@ -30,3 +32,4 @@ npm run build
 
 # format & lint
 npm run format
+```

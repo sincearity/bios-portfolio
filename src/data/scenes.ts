@@ -1,4 +1,3 @@
-// src/data/scenes.ts
 export type Scene = 'home' | 'bios-terminal' | 'mustard-cms'
 
 export const SCENES: Record<Scene, string> = {
@@ -6,7 +5,7 @@ export const SCENES: Record<Scene, string> = {
 
 BIOS-TERMINAL
 A minimalist terminal UI with typewriter pacing,
-syntax-like highlights, and synced glow/cursor.
+syntax-like highlights, and synced cursor.
 
 STACK
 - Next.js (App Router)
@@ -34,8 +33,12 @@ HELLO, I'M DOAN NGUYEN.
 COO @ MUSTARD SOFTWARE. DESIGNER + ENGINEER.
 
 [PROJECTS]
-- BIOS-TERMINAL [OPEN bios-terminal]
-- MUSTARD CMS [OPEN mustard-cms]
+- BIOS-TERMINAL      [OPEN bios-terminal]
+- MUSTARD CMS        [OPEN mustard-cms]
+
+[INFO]
+- ABOUT              [OPEN about]
+- RESUME             [OPEN resume]
 
 [CONTACT]
 EMAIL: doan@mustard.so

@@ -1,4 +1,5 @@
 import { InteractiveTerminal } from '@/components/ui/InteractiveTerminal'
+import { ThemeToggle } from '@/components/ui/ThemeToggle'
 
 export default function Home() {
   return (
@@ -21,6 +22,10 @@ export default function Home() {
           <span className="ml-3 text-muted [font-size:clamp(11px,1.2vw,13px)] tracking-wide">
             portfolio.sh
           </span>
+
+          <div className="ml-auto">
+            <ThemeToggle />
+          </div>
         </header>
 
         <div className="relative p-[clamp(18px,4vw,28px)]">

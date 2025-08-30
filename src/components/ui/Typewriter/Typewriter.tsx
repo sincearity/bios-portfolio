@@ -224,10 +224,7 @@ export const Typewriter = memo(function Typewriter({
       <span className="inline">
         {highlight(parts[lastIndex] ?? '', { onSelect, onOpen, onBack })}
         {/* Caret */}
-        <span
-          className="ml-1 inline-block w-[0.6ch] h-[1.1em] align-text-bottom bg-fg/80 animate-pulse"
-          aria-hidden
-        />
+        <span className="caret" aria-hidden="true" />
       </span>
     </div>
   )

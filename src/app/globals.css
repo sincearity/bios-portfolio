@@ -251,35 +251,42 @@ body::after {
    5) TERMINAL GLOW + CURSOR
    ========================================================= */
 @keyframes pulse-glow {
-    0%, 100% {
-        box-shadow:
-                0 8px 24px rgba(0, 0, 0, 0.35),
-                0 0 30px hsl(var(--accent) / 0.12);
-    }
-    50% {
-        box-shadow:
-                0 8px 24px rgba(0, 0, 0, 0.35),
-                0 0 44px hsl(var(--accent) / 0.2);
-    }
+  0%,
+  100% {
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.35),
+      0 0 30px hsl(var(--accent) / 0.12);
+  }
+  50% {
+    box-shadow:
+      0 8px 24px rgba(0, 0, 0, 0.35),
+      0 0 44px hsl(var(--accent) / 0.2);
+  }
 }
 .animate-glow {
-    animation: pulse-glow 4s ease-in-out infinite;
+  animation: pulse-glow 4s ease-in-out infinite;
 }
 
 /* Blinking block cursor (terminal-style) */
 @keyframes blink-block {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
 }
 
 .caret {
-    display: inline-block;
-    width: 0.65em;           /* block width ~ character width */
-    height: 1.1em;           /* match line height */
-    vertical-align: -0.15em; /* align with baseline */
-    margin-left: 0.1em;
-    background: hsl(var(--fg));
-    animation: blink-block 1.1s steps(1, start) infinite;
+  display: inline-block;
+  width: 0.65em; /* block width ~ character width */
+  height: 1.1em; /* match line height */
+  vertical-align: -0.15em; /* align with baseline */
+  margin-left: 0.1em;
+  background: hsl(var(--fg));
+  animation: blink-block 1.1s steps(1, start) infinite;
 }
 
 /* =========================================================
@@ -288,102 +295,126 @@ body::after {
 
 /* CRT vignette glow */
 .fx-crt {
-    position: relative;
-    isolation: isolate;
-    filter: saturate(1.05) contrast(1.02);
+  position: relative;
+  isolation: isolate;
+  filter: saturate(1.05) contrast(1.02);
 }
 /* keep inside the rounded box */
 .fx-crt::before {
-    content: "";
-    position: absolute; inset: 0;
-    pointer-events: none;
-    border-radius: inherit;
-    background:
-            radial-gradient(ellipse at center, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 60%),
-            radial-gradient(ellipse at center, rgba(0,0,0,0) 55%, rgba(0,0,0,0.45) 100%);
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background:
+    radial-gradient(ellipse at center, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0) 60%),
+    radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 55%, rgba(0, 0, 0, 0.45) 100%);
 }
 
 /* Scanline overlay */
 .scanlines {
-    position: relative;
-    isolation: isolate;
+  position: relative;
+  isolation: isolate;
 }
 .scanlines::after {
-    content: "";
-    position: absolute; inset: 0;
-    pointer-events: none;
-    border-radius: inherit;
-    background:
-            repeating-linear-gradient(
-                    to bottom,
-                    rgba(255,255,255,0.05) 0px,
-                    rgba(255,255,255,0.05) 1px,
-                    rgba(0,0,0,0) 3px
-            );
-    mix-blend-mode: multiply;
-    opacity: 0.18;
-    animation: scan-flicker 6s ease-in-out infinite;
-    z-index: 2;
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.05) 0px,
+    rgba(255, 255, 255, 0.05) 1px,
+    rgba(0, 0, 0, 0) 3px
+  );
+  mix-blend-mode: multiply;
+  opacity: 0.18;
+  animation: scan-flicker 6s ease-in-out infinite;
+  z-index: 2;
 }
 @keyframes scan-flicker {
-    0%, 100% { opacity: 0.16; }
-    40%, 60% { opacity: 0.22; }
+  0%,
+  100% {
+    opacity: 0.16;
+  }
+  40%,
+  60% {
+    opacity: 0.22;
+  }
 }
 
 /* Glitch text effect */
 .glitch {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 .glitch::before,
 .glitch::after {
-    content: attr(data-text);
-    position: absolute; left: 0; top: 0;
-    pointer-events: none;
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
 }
-.glitch::before { text-shadow: -1px 0 rgba(255,0,0,0.7); }
-.glitch::after  { text-shadow:  1px 0 rgba(0,128,255,0.7); }
+.glitch::before {
+  text-shadow: -1px 0 rgba(255, 0, 0, 0.7);
+}
+.glitch::after {
+  text-shadow: 1px 0 rgba(0, 128, 255, 0.7);
+}
 
 @keyframes glitch-jitter {
-    0%   { transform: translate(0, 0); }
-    15%  { transform: translate(-0.5px, 0.4px); }
-    30%  { transform: translate(0.6px, -0.5px); }
-    45%  { transform: translate(-0.4px, 0.6px); }
-    60%  { transform: translate(0.5px, 0.2px); }
-    75%  { transform: translate(-0.6px, -0.4px); }
-    100% { transform: translate(0, 0); }
+  0% {
+    transform: translate(0, 0);
+  }
+  15% {
+    transform: translate(-0.5px, 0.4px);
+  }
+  30% {
+    transform: translate(0.6px, -0.5px);
+  }
+  45% {
+    transform: translate(-0.4px, 0.6px);
+  }
+  60% {
+    transform: translate(0.5px, 0.2px);
+  }
+  75% {
+    transform: translate(-0.6px, -0.4px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
 }
 .glitch,
 .glitch::before,
 .glitch::after {
-    animation: glitch-jitter 900ms steps(1, end) infinite;
+  animation: glitch-jitter 900ms steps(1, end) infinite;
 }
-
-
 
 /* =========================================================
    6) ACCESSIBILITY: REDUCED MOTION (one place for all)
    ========================================================= */
 @media (prefers-reduced-motion: reduce) {
-    .animate-glow,
-    .animate-blink-sync,
-    .caret,
-    .caret > i,
-    .glitch,
-    .glitch::before,
-    .glitch::after,
-    .scanlines::after,
-    .scene-enter,
-    .scene-exit,
-    .scan-wipe {
-        animation: none !important;
-    }
-    body::before,
-    body::after {
-        animation: none !important;
-    }
+  .animate-glow,
+  .animate-blink-sync,
+  .caret,
+  .caret > i,
+  .glitch,
+  .glitch::before,
+  .glitch::after,
+  .scanlines::after,
+  .scene-enter,
+  .scene-exit,
+  .scan-wipe {
+    animation: none !important;
+  }
+  body::before,
+  body::after {
+    animation: none !important;
+  }
 }
-
 
 /* =========================================================
    7) UX UTILITIES
@@ -421,23 +452,32 @@ body::after {
 
 /* terminal container */
 .terminal-box {
-    position: relative;
-    border: none;
-    background: transparent;
-    border-radius: var(--radius);
-    backdrop-filter: none;
-    overflow: hidden;
-    box-shadow: none;
+  position: relative;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius);
+  backdrop-filter: none;
+  overflow: hidden;
+  box-shadow: none;
 }
 
-.fx-crt::before { inset: 0; border-radius: inherit; }
-.scanlines::after { border-radius: inherit; opacity: 0.12; }
-.scan-wipe { border-radius: inherit; }
+.fx-crt::before {
+  inset: 0;
+  border-radius: inherit;
+}
+.scanlines::after {
+  border-radius: inherit;
+  opacity: 0.12;
+}
+.scan-wipe {
+  border-radius: inherit;
+}
 
 /* remove effect for light mode */
 html:not(.dark) .fx-crt::before,
-html:not(.dark) .scanlines::after { content: none; }
-
+html:not(.dark) .scanlines::after {
+  content: none;
+}
 
 /* =========================================================
    8) SCENE TRANSITIONS
