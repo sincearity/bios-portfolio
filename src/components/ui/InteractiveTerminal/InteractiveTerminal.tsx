@@ -210,7 +210,7 @@ function ResumeContent() {
             </div>
             <ul className="mt-2 text-sm space-y-1">
               <li>Lead design systems, product architecture, and delivery.</li>
-              <li>Shape technical direction across client projects (Next.js, Tailwind, MDX).</li>
+              <li>Shape technical direction across client projects (Next.js, Tailwind, Mustard CMS).</li>
               <li>Focus on bridging design workflows with developer velocity.</li>
             </ul>
           </div>
@@ -280,7 +280,6 @@ function ResumeContent() {
             <SkillBadge label="React" code="RE" />
             <SkillBadge label="TypeScript" code="TS" />
             <SkillBadge label="Tailwind" code="TW" />
-            <SkillBadge label="MDX" code="MDX" />
             <SkillBadge label="Framer Motion" code="FM" />
           </div>
         </div>

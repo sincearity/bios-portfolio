@@ -52,7 +52,6 @@ export function ThemeToggle() {
   function resetToSystem() {
     // optional: hold Alt/Option while clicking to reset to system preference
     const sys = getSystemPrefersDark()
-    // remove explicit choice
     try {
       localStorage.removeItem(STORAGE_KEY)
     } catch {}
